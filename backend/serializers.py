@@ -5,5 +5,5 @@ from .models import Dish
 class DishSerializers(serializers.ModelSerializer):
     class Meta:
         model = Dish
-        field = ['name', 'price', 'tag', 'category']
+        fields = '__all__'
 
