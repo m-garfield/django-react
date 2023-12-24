@@ -17,8 +17,8 @@ class Category(MPTTModel):
                             )
     class MPTTMeta:
         order_insertion_by = ['name']
-        def __str__(self):
-            return self.name
+    def __str__(self):
+        return self.name
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
