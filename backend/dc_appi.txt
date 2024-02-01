@@ -1,0 +1,33 @@
+                                Добавление заказа.
+
+  POSTзапрос на /api/backend/order/create/
+
+  передаваемый контент в виде json :
+
+  {
+    "status": "in_progress",
+    "delivery_address": " Адрес доставки",
+    "phone_number": "Номер телефона заказчика для обратной связи"
+
+}
+
+
+                                Получения списка блюд.
+
+GETзапрос на  /api/backend/dish/
+
+получаемый контент в виде списка json - чиков:
+
+[
+    {
+        "id": 1,
+        "name": "Оливье",
+        "price": 230,
+        "image": "http://127.0.0.1:8000/articles/olivie_salt_HKkLRAU.jpg",
+        "category_name": "Cалаты",
+        "tags": [
+            1
+        ]
+    }
+]
+

@@ -19,5 +19,13 @@ class AdminCategory(admin.ModelAdmin):
 class DishAdmin(admin.ModelAdmin):
     list_display = ['name', 'price', 'category', 'image']
 
+@admin.register(models.Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['created_at',
+    'status',
+    'delivery_address',
+    'phone_number']
+    list_editable = ('status',)
+
 
 admin.site.register(models.Tag)
