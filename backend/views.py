@@ -9,3 +9,7 @@ class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializers
 
 # Create your views here.
+
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'backend/orders.html', {'orders': orders})

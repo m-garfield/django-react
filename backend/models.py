@@ -59,6 +59,34 @@ class Order(models.Model):
     status = models.CharField(max_length=100, choices=ORDER_STATUS_CHOICES, default='in_progress')
     # поле адреса доставки
     delivery_address = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=100, null=False, default='Отсутствует')
+    phone_number = models.CharField(max_length=100, null=True, default='Отсутствует')
+
+    def display_orderitems(self):
+        """
+        Creates a string for the Genre. This is required to display genre in Admin.
+        """
+        return [str(item.dish) +' : '+ str(item.quantity) + '\n' for item in self.ordered_items.all() if item.dish]
+
+    display_orderitems.short_description = 'orderitems'
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = "Список заказов"
+        ordering = ('-created_at',)
+
     def __str__(self):
-        return f"Order #{self.pk}"
+        return str(self.created_at)
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, verbose_name='Заказ', related_name='ordered_items', blank=True,
+                              on_delete=models.CASCADE)
+
+    dish = models.ForeignKey(Dish, verbose_name='Информация блюде', related_name='ordered_items',
+                                     blank=True,
+                                     on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(verbose_name='Количество')
+
+    class Meta:
+        verbose_name = 'Заказанное блюдо'
+        verbose_name_plural = "Список заказанных блюд"
