@@ -7,6 +7,7 @@ from . import models
 
 class DishInline(admin.StackedInline):
     model = models.Dish
+    fields = ["description", 'status']
     extra = 0
 
 class OrderItemInline(admin.StackedInline):
@@ -22,8 +23,8 @@ class AdminCategory(admin.ModelAdmin):
 
 @admin.register(models.Dish)
 class DishAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'category', 'image']
-
+    list_display = ['name', 'category', "description", 'status', 'price']
+    list_editable = ('status',)
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -31,7 +32,8 @@ class OrderAdmin(admin.ModelAdmin):
                     'status',
                     'delivery_address',
                     'phone_number',
-                    'display_orderitems']
+                    'display_orderitems',
+                    'display_fullprice']
     inlines = [OrderItemInline]
     list_editable = ('status',)
 
@@ -42,6 +44,6 @@ class OrderItemsAdmin(admin.ModelAdmin):
                     'dish',
                     'quantity'
                     ]
+  
 
-
-admin.site.register(models.Tag)
+#admin.site.register(models.Tag)
